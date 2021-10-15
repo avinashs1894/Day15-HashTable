@@ -1,9 +1,9 @@
 package com.bridglab.HashTable;
 
+
 public class HashTableImplementation<K, V> {
 	Node head;
 	Node tail;
-	private Node currentNode;
 
 	public void add(K key, V value) {
 		Node<K, V> myNode = (Node<K, V>) searchNode(key);
@@ -29,7 +29,7 @@ public class HashTableImplementation<K, V> {
 
 	// Searching for the word in the linked list
 	public Node<K, V> searchNode(K data) {
-		currentNode = head;
+		Node currentNode = head;
 		int position = 0;
 		while (currentNode != null) {
 			position++;
@@ -50,6 +50,25 @@ public class HashTableImplementation<K, V> {
 			return myMapNode.getValue();
 		}
 
+	}
+
+	// Remove "avoidable" from hashtable
+	public void remove(K word) {
+		Node currentNode = head;
+		Node previousNode = null;
+		while (currentNode != null && currentNode.getKey().equals(word)) {
+			head = currentNode.getNext();
+			return;
+		}
+		while (currentNode != null && !(currentNode.getKey().equals(word))) {
+			previousNode = currentNode;
+			currentNode = currentNode.getNext();
+		}
+		if (currentNode != null) {
+			previousNode.next = currentNode.next;
+		}
+		if (currentNode == null)
+			System.out.println("Word not found!");
 	}
 
 	// Print the linked list
